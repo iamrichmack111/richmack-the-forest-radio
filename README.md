@@ -172,3 +172,16 @@ Controls: `R` opens/closes the radio, `K` plays or pauses, `N` selects the next 
 ## macOS Chrome Launcher
 
 Run scripts/launch-richmack.command or double-click Richmack-The-Forest.command on the desktop. The launcher starts the local server and opens the game in Google Chrome.
+## Screenshots
+
+### Vampire encounter
+
+![Vampire encounter](docs/screenshots/vampire-strike.png)
+
+### Game-over screen
+
+![The Forest Claimed You](docs/screenshots/forest-claimed-you.png)
+
+### Title screen
+
+![Richmack: The Forest title screen](docs/screenshots/title-screen.jpeg)
