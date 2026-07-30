@@ -1,6 +1,6 @@
 {
   "name": "richmack-the-forest",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "private": true,
   "description": "Richmack: The Forest is an optimized browser-based haunted open-world driving survival game built with Three.js.",
   "scripts": {

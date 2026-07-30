@@ -168,3 +168,7 @@ Richmack: The Forest is an optimized browser-based haunted open-world driving su
 Version 2.2.0 bundles 17 local MP3 tracks for offline in-game playback. The cinematic title screen stays uncluttered; radio controls appear only after entering the forest.
 
 Controls: `R` opens/closes the radio, `K` plays or pauses, `N` selects the next track, and `B` selects the previous track. Volume, shuffle, repeat, and the last selected track are remembered in browser storage.
+
+## macOS Chrome Launcher
+
+Run scripts/launch-richmack.command or double-click Richmack-The-Forest.command on the desktop. The launcher starts the local server and opens the game in Google Chrome.
