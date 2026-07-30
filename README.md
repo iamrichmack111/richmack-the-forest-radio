@@ -236,3 +236,26 @@ Remove the Linux launcher with:
 ```bash
 ./scripts/uninstall-linux-desktop.sh
 ```
+
+## Docker Compose
+
+Build and run the game:
+
+    docker compose up --build -d
+
+Open http://127.0.0.1:8080
+
+Convenience commands:
+
+    ./scripts/docker-start.sh
+    ./scripts/docker-stop.sh
+
+Use another port:
+
+    RICHMACK_PORT=9000 docker compose up --build -d
+
+View status and logs:
+
+    docker compose ps
+    docker compose logs -f
+

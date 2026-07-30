@@ -1,0 +1,11 @@
+.git
+.github
+.runtime
+node_modules
+npm-debug.log
+.DS_Store
+*.zip
+*.tar
+*.tar.gz
+*.log
+js/main.js.before-reset-fix
