@@ -200,7 +200,20 @@ function bindRadioControls(){
 
 function restart(){
   resetVehicle(vehicle);
-  score=0;money=0;gameOver=false;treeHitCooldown=0;enemyHitCooldown=0;
+
+  // Release keyboard and touch controls that may remain held during reset.
+  Object.keys(keys).forEach(key => {
+    keys[key] = false;
+  });
+
+  score=0;
+  money=0;
+  gameOver=false;
+  treeHitCooldown=1.5;
+
+  // Give the player time to drive away before monster collisions apply.
+  enemyHitCooldown=3;
+
   missions.reset();
   enemyManager.items.forEach(e=>{e.active=false;e.mesh.visible=false;e.campId=null});
   enemyManager.bossActive=false;
@@ -208,7 +221,7 @@ function restart(){
   enemyManager.activateAround(vehicle.group.position);
   camps.camps.forEach(c=>{c.cleared=false;c.spawned=false;c.remaining=0});
   events.active=null;events.remaining=0;events.cooldown=42;
-  flash("FOREST RUN RESET");
+  flash("FOREST RUN RESET — 3 SECOND ESCAPE WINDOW",2600);
 }
 
 function update(dt){
