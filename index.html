@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Richmack: The Forest</title>
+  <link rel="stylesheet" href="css/ui.css?v=2.2.2">
+  <link rel="stylesheet" href="css/forest.css?v=2.2.2">
+</head>
+<body>
+  <div id="loading" class="screen active">
+    <img id="titleImage" src="assets/images/title-screen.png?v=2.2.2" alt="Richmack: The Forest title artwork">
+    <div class="menu-card">
+      <div class="brand">RICHMACK</div>
+      <h1>THE FOREST</h1>
+      <p class="tagline">Drive the night. Survive the forest.</p>
+
+      <label for="quality">Graphics</label>
+      <select id="quality">
+        <option value="fast" selected>Ultra Fast — Recommended</option>
+        <option value="balanced">Balanced</option>
+        <option value="quality">Ultra Quality</option>
+      </select>
+
+      <div class="instruction-pages">
+        <section class="instruction-page active" data-page="0">
+          <h2>Mission</h2>
+          <p>Survive endless monster waves, clear haunted camps, defeat bosses, complete missions, and recover hidden relics.</p>
+        </section>
+        <section class="instruction-page" data-page="1">
+          <h2>Driving</h2>
+          <p><b>W / ↑</b> accelerate · <b>S / ↓</b> reverse · <b>A/D</b> steer · <b>Space</b> shoot · <b>Shift</b> handbrake.</p>
+        </section>
+        <section class="instruction-page" data-page="2">
+          <h2>Survival</h2>
+          <p>Collect fuel, repair damage, gather ammunition, earn money, and unlock mission areas.</p>
+        </section>
+        <section class="instruction-page" data-page="3">
+          <h2>Tips</h2>
+          <p>Enemies respawn around your route. Use ranger stations for repairs, expect night events, and watch for boss encounters.</p>
+        </section>
+      </div>
+
+      <div class="pager">
+        <button id="prevHelp">Previous</button>
+        <span id="pageLabel">1 / 4</span>
+        <button id="nextHelp">Next</button>
+      </div>
+
+      <button id="startGame" class="primary">ENTER THE FOREST</button>
+<p id="startupStatus" class="startup-status">Game engine ready check will appear here.</p>
+      <p class="small">Three.js loads from jsDelivr. Internet access is required at startup.</p>
+    </div>
+  </div>
+
+  <div id="pause" class="screen">
+    <div class="menu-card small-card">
+      <div class="brand">RICHMACK</div>
+      <h1>PAUSED</h1>
+      <button id="resumeGame" class="primary">RESUME</button>
+      <button id="restartGame">RESTART</button>
+    </div>
+  </div>
+
+  <div id="hud">
+    <div class="hud-panel left">
+      <div class="hud-brand">RICHMACK RACING</div>
+      <div class="meter"><span>Health</span><div><i id="healthBar"></i></div></div>
+      <div class="meter"><span>Fuel</span><div><i id="fuelBar"></i></div></div>
+      <div class="meter"><span>Damage</span><div><i id="damageBar"></i></div></div>
+      <div class="stats">
+        <span>Ammo <b id="ammo">0</b></span>
+        <span>Money <b id="money">$0</b></span>
+        <span>Speed <b id="speed">0 MPH</b></span>
+      </div>
+    </div>
+
+    <div class="hud-panel mission">
+      <div id="missionName">Mission</div>
+      <div id="missionText">Loading...</div>
+      <div id="missionProgress">0 / 0</div>
+    </div>
+
+    <div class="hud-panel right">
+      <div>Score <b id="score">0</b></div>
+      <div>Enemies <b id="enemyCount">0</b></div>
+      <div>Now Playing <b id="radioStation">Radio Ready</b></div>
+      <div>Graphics <b id="qualityLabel">FAST</b></div>
+    </div>
+  </div>
+
+
+  <aside id="radioPanel" aria-label="Richmack Radio controls">
+    <div class="radio-head">
+      <div><span>RICHMACK</span> RADIO</div>
+      <button id="radioClose" aria-label="Close radio">×</button>
+    </div>
+    <div id="radioTrack">Radio Ready</div>
+    <div id="radioCounter">Track 1 / 17</div>
+    <input id="radioProgress" type="range" min="0" max="1" step="0.001" value="0" aria-label="Song progress">
+    <div class="radio-time"><span id="radioElapsed">0:00</span><span id="radioDuration">0:00</span></div>
+    <div class="radio-controls">
+      <button id="radioPrev">◀◀</button>
+      <button id="radioPlay">PLAY</button>
+      <button id="radioNext">▶▶</button>
+    </div>
+    <label class="radio-volume">Volume <input id="radioVolume" type="range" min="0" max="1" step="0.01" value="0.72"></label>
+    <div class="radio-options">
+      <button id="radioShuffle">SHUFFLE</button>
+      <button id="radioRepeat">REPEAT</button>
+    </div>
+    <p>R opens radio · K play/pause · N next · B previous</p>
+  </aside>
+
+  <div id="message"></div>
+  <canvas id="minimap" width="190" height="190"></canvas>
+
+  <div id="topButtons">
+    <button id="pauseBtn">PAUSE</button>
+    <button id="cameraBtn">CAMERA</button>
+    <button id="lightsBtn">LIGHTS</button>
+    <button id="radioBtn">RADIO</button>
+    <button id="resetBtn">RESET</button>
+  </div>
+
+  <div id="touchControls">
+    <div id="drivePad">
+      <button id="btnUp">▲</button>
+      <button id="btnLeft">◀</button>
+      <button id="btnDown">▼</button>
+      <button id="btnRight">▶</button>
+    </div>
+    <div id="actionPad">
+      <button id="shootBtn">SHOOT</button>
+      <button id="brakeBtn">BRAKE</button>
+    </div>
+  </div>
+
+  <script>
+  (() => {
+    let page = 0;
+    const pages = Array.from(document.querySelectorAll(".instruction-page"));
+    const label = document.getElementById("pageLabel");
+
+    function showPage(index) {
+      page = (index + pages.length) % pages.length;
+      pages.forEach((item, i) => item.classList.toggle("active", i === page));
+      label.textContent = `${page + 1} / ${pages.length}`;
+    }
+
+    document.getElementById("prevHelp").addEventListener("click", () => showPage(page - 1));
+    document.getElementById("nextHelp").addEventListener("click", () => showPage(page + 1));
+    showPage(0);
+  })();
+</script>
+<script type="module">
+  const status = document.getElementById("startupStatus");
+  import("./js/main.js?v=2.2.2")
+    .then(() => {
+      status.textContent = "Richmack game engine loaded. Press ENTER THE FOREST.";
+      status.classList.add("ready");
+    })
+    .catch((error) => {
+      console.error("Richmack: The Forest failed to load", error);
+      status.textContent =
+        "The 3D engine did not load. Confirm internet access, run start-game.sh, and refresh the page.";
+      status.classList.add("error");
+      document.getElementById("startGame").disabled = true;
+    });
+</script>
+</body>
+</html>
