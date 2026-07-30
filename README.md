@@ -185,3 +185,54 @@ Run scripts/launch-richmack.command or double-click Richmack-The-Forest.command 
 ### Title screen
 
 ![Richmack: The Forest title screen](docs/screenshots/title-screen.jpeg)
+## Screenshots
+
+### Vampire encounter
+
+![Vampire encounter](docs/screenshots/vampire-strike.png)
+
+### Game-over screen
+
+![The Forest Claimed You](docs/screenshots/forest-claimed-you.png)
+
+### Title screen
+
+![Richmack: The Forest title screen](docs/screenshots/title-screen.jpeg)
+
+## Desktop Installation
+
+### macOS
+
+Create a normal macOS application bundle with an icon:
+
+```bash
+./scripts/install-macos-app.sh
+```
+
+The app is installed at:
+
+```text
+~/Applications/Richmack The Forest.app
+```
+
+It starts the local server and opens the game in Google Chrome.
+
+### Pop!_OS, Linux Mint, Ubuntu, and compatible Linux desktops
+
+Install an application-menu entry, launcher command, desktop shortcut, and icon:
+
+```bash
+./scripts/install-linux-desktop.sh
+```
+
+The launcher command is:
+
+```bash
+richmack-the-forest
+```
+
+Remove the Linux launcher with:
+
+```bash
+./scripts/uninstall-linux-desktop.sh
+```
