@@ -1,5 +1,10 @@
 # Richmack: The Forest 2.0
 
+[![CI + Playwright](https://github.com/iamrichmack111/richmack-the-forest-radio/actions/workflows/ci.yml/badge.svg)](https://github.com/iamrichmack111/richmack-the-forest-radio/actions/workflows/ci.yml)
+![Playwright](https://img.shields.io/badge/tested%20with-Playwright-2EAD33?logo=playwright)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES202x-F7DF1E?logo=javascript&logoColor=000)
+![Latest Tag](https://img.shields.io/github/v/tag/iamrichmack111/richmack-the-forest-radio?label=version)
+
 An optimized haunted open-world driving survival game built with Three.js.
 
 ## New in 2.0
@@ -258,4 +263,15 @@ View status and logs:
 
     docker compose ps
     docker compose logs -f
+
+## Playwright Screenshots
+
+### Landing
+![Richmack The Forest Radio landing screen](screenshots/01-landing.png)
+
+### Gameplay
+![Richmack The Forest Radio gameplay](screenshots/02-gameplay.png)
+
+### Level / Challenge
+![Richmack The Forest Radio level](screenshots/03-level.png)
 
