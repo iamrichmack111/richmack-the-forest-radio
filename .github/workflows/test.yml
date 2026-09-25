@@ -2,25 +2,72 @@ name: Test
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - master
   pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: test-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
+    name: test
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
-      - name: Check out repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v5
         with:
           node-version: "22"
 
-      - name: Run syntax and project tests
-        run: npm run test:all
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Validate JavaScript
+        run: |
+          node --check playwright.config.js
+          node --check server.js
+          node --check tests/smoke.spec.js
+          node --check tests/screenshots.spec.js
+
+      - name: Run smoke tests
+        run: npx playwright test tests/smoke.spec.js --project=chromium
+
+      - name: Generate screenshots
+        run: npx playwright test tests/screenshots.spec.js --project=chromium
+
+      - name: Verify README screenshot files
+        run: |
+          test -s screenshots/01-home.png
+          test -s screenshots/02-interactive.png
+          test -s screenshots/03-radio-state.png
+          ls -lh screenshots/
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-playwright-report
+          path: playwright-report/
+          if-no-files-found: ignore
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-screenshots
+          path: screenshots/
+          if-no-files-found: warn
