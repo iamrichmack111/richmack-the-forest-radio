@@ -1,5 +1,15 @@
 # Richmack: The Forest 2.0
 
+<!-- FOREST-RADIO-BADGES:START -->
+[![CI + Playwright](https://github.com/iamrichmack111/richmack-the-forest-radio/actions/workflows/ci.yml/badge.svg)](https://github.com/iamrichmack111/richmack-the-forest-radio/actions/workflows/ci.yml)
+[![Playwright](https://img.shields.io/badge/tested%20with-Playwright-45ba4b.svg)](https://playwright.dev/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ESM-yellow.svg)](https://developer.mozilla.org/docs/Web/JavaScript)
+[![Latest Release](https://img.shields.io/github/v/release/iamrichmack111/richmack-the-forest-radio?include_prereleases&sort=semver)](https://github.com/iamrichmack111/richmack-the-forest-radio/releases)
+<!-- FOREST-RADIO-BADGES:END -->
+
+
+
+
 [![CI + Playwright](https://github.com/iamrichmack111/richmack-the-forest-radio/actions/workflows/ci.yml/badge.svg)](https://github.com/iamrichmack111/richmack-the-forest-radio/actions/workflows/ci.yml)
 ![Playwright](https://img.shields.io/badge/tested%20with-Playwright-2EAD33?logo=playwright)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES202x-F7DF1E?logo=javascript&logoColor=000)
@@ -275,3 +285,16 @@ View status and logs:
 ### Level / Challenge
 ![Richmack The Forest Radio level](screenshots/03-level.png)
 
+<!-- FOREST-RADIO-SCREENSHOTS:START -->
+## Screenshots
+
+### Home
+![Richmack The Forest Radio home](screenshots/01-home.png)
+
+### Interactive View
+![Richmack The Forest Radio interactive view](screenshots/02-interactive.png)
+
+### Radio State
+![Richmack The Forest Radio radio state](screenshots/03-radio-state.png)
+
+<!-- FOREST-RADIO-SCREENSHOTS:END -->

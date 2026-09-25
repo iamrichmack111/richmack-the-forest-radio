@@ -3,3 +3,5 @@ node_modules/
 *.log
 richmack-the-forest-v*.zip
 .runtime/
+playwright-report/
+test-results/
